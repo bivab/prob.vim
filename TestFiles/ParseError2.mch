@@ -1,0 +1,18 @@
+MACHINE Untitled
+DEFINITIONS
+ FF=={aa,bb};
+ "not_there.def"
+SETS
+
+ ID
+CONSTANTS iv
+PROPERTIES
+ iv:ID
+VARIABLES xx
+INVARIANT
+ xx:ID
+INITIALISATION xx:=iv
+OPERATIONS
+  Set(yy) = PRE yy:ID THEN xx:= yy END
+END
+
