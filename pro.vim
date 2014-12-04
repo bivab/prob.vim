@@ -5,7 +5,7 @@
 let g:prob_parser="probcli"
 
 " Checking {{{1
-function! Prob#Check()
+function! Pro#Check()
   let cmd=g:prob_parser ." -p MAX_INITIALISATIONS 0 ".@%.' 1>/dev/null'
   let l:prob_lines=systemlist(cmd)
   if len(l:prob_lines) == 0
@@ -22,6 +22,6 @@ endfunction " }}}1
 
 
 augroup prob
-  au! " clear autocommand in this group
-  autocmd! BufWritepost,FileWritePost,BufReadPost *.mch call Prob#Check()
+  au!
+  autocmd! BufWritepost,FileWritePost,BufReadPost *.mch call Pro#Check()
 augroup END
