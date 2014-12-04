@@ -1,5 +1,6 @@
 " TODO: fix scoping of identifiers
 " TODO: Avoid putting focus on quickfixlist or locationlist
+" TODO: CHECK opnening files in different direcotories
 
 let g:prob_parser="probcli"
 
