@@ -1,11 +1,12 @@
 " TODO: fix scoping of identifiers
 " TODO: Avoid putting focus on quickfixlist or locationlist
 " TODO: CHECK opnening files in different direcotories
+" Checking {{{1
 
+" XXX check if overridden
 let g:prob_parser="probcli"
 
-" Checking {{{1
-function! Pro#Check()
+function! Probcli#Check()
   let cmd=g:prob_parser ." -p MAX_INITIALISATIONS 0 ".@%.' 1>/dev/null'
   let l:prob_lines=systemlist(cmd)
   set errorformat=%E\!\ source(parse_error),%C\!\ [%l\\,%c]\ %m " for probcli output
@@ -13,9 +14,3 @@ function! Pro#Check()
   cex l:prob_lines
   cw
 endfunction " }}}1
-
-
-augroup prob
-  au!
-  autocmd! BufWritepost,FileWritePost,BufReadPost *.mch call Pro#Check()
-augroup END
