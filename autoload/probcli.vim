@@ -1,6 +1,8 @@
 " TODO: fix scoping of identifiers
 " TODO: Avoid putting focus on quickfixlist or locationlist
-" TODO: CHECK opnening files in different direcotories
+" TODO: CHECK opening files in different dirs, java parser only prints
+" filename and not the path information
+"
 if exists("g:loaded_probcli")
     finish
 endif
