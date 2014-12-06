@@ -1,4 +1,3 @@
-" TODO: fix scoping of identifiers
 " TODO: Avoid putting focus on quickfixlist or locationlist
 " TODO: CHECK opening files in different dirs, java parser only prints
 " filename and not the path information
