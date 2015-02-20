@@ -17,7 +17,7 @@ Plugin 'bivab/prob.vim'
 
 NeoBundle 'bivab/prob.vim'
 
-### Fugitive
+### pathogen.vim
 
 cd ~/.vim/bundle
 git clone https://github.com/bivab/prob.vim
