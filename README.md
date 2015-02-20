@@ -29,5 +29,5 @@ binary can be configured by overriding the `g:prob_parser` variable in your
 VIM configuration.
 
 ```sh
-let g:prob_parser = ~/some_path/probcli
+let g:prob_parser = "~/some_path/probcli"
 ```
