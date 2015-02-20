@@ -11,16 +11,22 @@ corresponding snippet in .vimrc or execute the corresponding commands:
 
 ### Vundle
 
+```vim
 Plugin 'bivab/prob.vim'
+```
 
 ### NeoBundle
 
+```vim
 NeoBundle 'bivab/prob.vim'
+```
 
 ### pathogen.vim
 
+```sh
 cd ~/.vim/bundle
 git clone https://github.com/bivab/prob.vim
+```
 
 ## Configuration
 
