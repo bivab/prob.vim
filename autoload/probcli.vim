@@ -12,7 +12,7 @@ if !exists("g:prob_parser")
   let g:prob_parser="probcli"
 end
 
-function! Probcli#Check() "{{{1
+function! probcli#Check() "{{{1
   let cmd=g:prob_parser ." -p MAX_INITIALISATIONS 0 ".@%.' 1>/dev/null'
   let l:prob_lines=systemlist(cmd)
   set errorformat=%E\!\ source(parse_error),%C\!\ [%*\\d\\,%*\\d]\ %m\ in\ file%.%#

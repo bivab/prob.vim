@@ -1,4 +1,4 @@
 augroup prob
   au!
-  autocmd! BufWritepost,FileWritePost,BufReadPost *.mch call Probcli#Check()
+  autocmd! BufWritepost,FileWritePost,BufReadPost *.mch call probcli#Check()
 augroup END
