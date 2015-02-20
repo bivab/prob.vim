@@ -28,6 +28,12 @@ cd ~/.vim/bundle
 git clone https://github.com/bivab/prob.vim
 ```
 
+### Manual Installation
+
+If you do not wan't to use a plugin manager, place a of copy
+the contents of this repository into the directores with the corresponding
+names within your `~/.vim` directory.
+
 ## Configuration
 
 The plugin expects the `probcli` binary in the current `$PATH`. The path to the
