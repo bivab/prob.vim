@@ -1,5 +1,7 @@
 # prob.vim
 
+![ProB Logo](http://www.stups.hhu.de/ProB/skins/prob/img/prob_logo.png)
+
 VIM plugin to show a quickfix list of parse and type errors for classical B
 machines (`.mch`) using the command line tool of the
 [ProB](http://stups.hhu.de/ProB) animator and model checker for the B-Method.
