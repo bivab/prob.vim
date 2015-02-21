@@ -34,6 +34,15 @@ If you do not wan't to use a plugin manager, place a of copy
 the contents of this repository into the directores with the corresponding
 names within your `~/.vim` directory.
 
+### Requirements
+
+This plugin depends on [ProB
+CLI](http://www.stups.hhu.de/ProB/index.php5/ProB_Cli) which is shipped with
+[ProB](http://stups.hhu.de/ProB), Additionally the ProB parser depends on Java
+7 or later, see [Java requirements for B
+parser](http://stups.hhu.de/ProB/index.php5/Download#Java__Requirements_for_B_parser)
+for details.
+
 ## Configuration
 
 The plugin expects the `probcli` binary in the current `$PATH`. The path to the
