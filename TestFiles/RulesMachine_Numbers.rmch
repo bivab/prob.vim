@@ -1,0 +1,153 @@
+RULES_MACHINE RulesMachine_Numbers
+DEFINITIONS
+GOAL ==
+  GET_RULE_COUNTEREXAMPLES(RULE_Check1) = {}
+  & GET_RULE_COUNTEREXAMPLES(RULE_Check2) = {}
+  & SUCCEEDED_RULE(RULE_Check1)
+  & SUCCEEDED_RULE_ERROR_TYPE(RULE_Check2, 1) & SUCCEEDED_RULE_ERROR_TYPE(RULE_Check2, 2)
+OPERATIONS
+
+COMPUTATION COMP_Numbers
+BODY
+  DEFINE
+    UpperBound
+  TYPE
+    INTEGER
+  DUMMY_VALUE - 1
+  VALUE
+    100
+  END//DEFINE
+  ;
+  DEFINE
+    EvenNumbers
+  TYPE
+    POW(INTEGER)
+  VALUE
+    {x| x : 0..UpperBound & x mod 2 = 0}
+  END//DEFINE
+  ;
+  DEFINE
+    NumberOfEvenNumbers
+  TYPE
+    INTEGER
+  DUMMY_VALUE -1
+  VALUE
+    card(EvenNumbers)
+  END//DEFINE
+END//COMPUTATION
+
+;
+RULE RULE_Check1
+DEPENDS_ON_COMPUTATION COMP_Numbers
+BODY
+  RULE_FAIL
+    WHEN NumberOfEvenNumbers > UpperBound
+    COUNTEREXAMPLE "The number of even numbers is greater than the upper bound."
+  END
+END
+
+;
+
+RULE RULE_Check2
+ERROR_TYPES 2
+DEPENDS_ON_COMPUTATION COMP_Numbers
+DEPENDS_ON_RULE
+  RULE_Check1 // If this rule violated, there is something wrong with EvenNumbers
+BODY
+  RULE_FORALL x
+  WHERE
+    x : 0..100 & x mod 2 = 1
+  EXPECT
+    x /: EvenNumbers
+  ERROR_TYPE 1
+  COUNTEREXAMPLE
+    STRING_FORMAT(
+      "Value ~w is in the set of even numbers."
+      , x
+    )
+  END
+  ;
+  RULE_FORALL x
+  WHERE
+    x : 0..100 & x mod 2 = 0
+  EXPECT
+    x : EvenNumbers
+  ERROR_TYPE 2
+  COUNTEREXAMPLE
+    STRING_FORMAT(
+      "Value ~w is not in the set of even numbers."
+      , x
+    )
+  END
+END//RULE
+;
+RULE RULE_PrimeNumbers
+DEPENDS_ON_COMPUTATION COMP_PrimeNumbers
+BODY
+  RULE_FAIL
+    x, y
+  WHEN
+    x : PrimeNumbers
+    & y : 1..x
+    & y /= 1
+    & y /= x
+    & x mod y = 0
+  COUNTEREXAMPLE
+    STRING_FORMAT("Number ~w is not a prime number because it is divisible by ~w.", x, y)
+  END//RULE_ANY
+END
+;
+COMPUTATION COMP_PrimeNumbers
+DEPENDS_ON_COMPUTATION COMP_Numbers
+BODY
+  VAR temp
+  IN
+    temp <-- FUNC_DeterminePrimeNumbers(UpperBound);
+    DEFINE
+      PrimeNumbers
+    TYPE
+      POW(INTEGER)
+    VALUE
+      temp
+    END//DEFINE
+  END
+END//COMPUTATION
+;
+FUNCTION out <-- FUNC_DeterminePrimeNumbers(P_UpperBound)
+PRECONDITION
+  P_UpperBound : NATURAL
+POSTCONDITION
+  out <: 1..P_UpperBound
+BODY
+  VAR primeNumbers
+  IN
+    primeNumbers := {};
+    FOR x IN 1..P_UpperBound
+    DO
+      VAR isPrime, y
+      IN
+        isPrime := TRUE;
+        y := 2;
+        WHILE y < x
+        DO
+          IF x mod y = 0
+          THEN
+            isPrime := FALSE
+          END;
+          y := y + 1
+        INVARIANT 1=1
+        VARIANT x-y
+        END//WHILE
+        ;
+        IF isPrime = TRUE
+        THEN
+          primeNumbers := primeNumbers \/ {x}
+        END
+      END//VAR
+    END//FOR
+    ;
+    out := primeNumbers
+  END//VAR
+END//FUNCTION
+
+END//RULES_MACHINE
